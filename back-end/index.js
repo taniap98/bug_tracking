@@ -3,9 +3,13 @@
 const express = require("express");
 const path = require("path")
 const db = require("./models");
-var app = express();
-var router = express.Router();
 
+var router = require('./routes');
+const bodyParser = require('body-parser');
+
+
+var app = express();
+app.use(bodyParser.json())
 app.use("/api", router);
 
 router.use((req, res, next) => {
