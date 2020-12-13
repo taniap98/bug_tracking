@@ -4,9 +4,9 @@ const userRouter = require('./user')
 const otherRouter = require('./other')
 
 if(process.env.NODE_ENV !== 'production') {
-    router.use('/',otherRouter);
+    router.use('/', otherRouter);
 }
 
-router.use('/',userRouter);
+router.use('/', userRouter);
 
 module.exports = router
