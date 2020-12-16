@@ -7,6 +7,7 @@ const tstRouter = require('./tst')
 const mpRouter = require('./mp')
 const otherRouter = require('./other')
 
+
 if(process.env.NODE_ENV !== 'production') {
     router.use('/', otherRouter);
 }
