@@ -56,8 +56,8 @@ router.use((req, res, next) => {
 
 
 
-db.sequelize.sync().then((req) => {
+//db.sequelize.sync().then((req) => {
     var port = 8080;
     app.listen(port);
     console.log("App is runing on port " + port);
-});
+//});

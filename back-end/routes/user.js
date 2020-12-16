@@ -5,19 +5,19 @@ const passport = require("passport");
 
 router.post('/register', userController.addUser);
 router.get('/users', checkNotAuth, userController.getAllUsers);
-router.get('/user/:id', userController.getOneUser);
-router.delete('/deleteuser/:id', userController.deleteOneUser);
+router.get('/user/:id', checkNotAuth, userController.getOneUser);
+router.delete('/deleteuser/:id', checkNotAuth, userController.deleteOneUser);
 
 router.get("/success", async (req, res) => {
-    console.log("S-a apelat aici deci tre sa fie logat");
+    console.log("Login successfully");
     res.status(200).send(req.session.id);
-  });
+});
   
-  router.get("/fail", async (req, res) => {
+router.get("/fail", async (req, res) => {
     res
-      .status(401)
-      .send({ message: "Email & Password combination does not match." });
-  });
+        .status(401)
+        .send({ message: "Email & Password combination does not match." });
+});
 
 function checkAuth(req, res, next) {
     if (req.isAuthenticated()) {
