@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         MP.belongsTo(models.user, {
             as: 'user',
             foreignKey: "id"
-        })
+        });
         MP.belongsTo(models.project, {
             as: 'project',
             foreignKey: "id"
