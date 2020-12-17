@@ -89,25 +89,74 @@ const controller = {
 },
 
     deleteOneBug: async(req, res) => {
-            try{
-                let bugId = req.path.split('/')[2];
-                const bug = await BugDB.destroy({
-                    where: {
-                        id: bugId
-                    }
-                })
-                res.status(200).send({
-                    message: "Bug " + bugId + " deleted."
-                });
-            } catch(error){
-                console.log(error);
-                res.status(500).send({
-                    message: "Error deleting bug!"
-                })
-            }
+        try{
+            let bugId = req.path.split('/')[2];
+            const bug = await BugDB.destroy({
+                where: {
+                    id: bugId
+                }
+            })
+            res.status(200).send({
+                message: "Bug " + bugId + " deleted."
+            });
+        } catch(error){
+            console.log(error);
+            res.status(500).send({
+                message: "Error deleting bug!"
+            })
+        }
     },
 
-   
+    updateStatus: async (req, res) => {
+        try{
+            let bugId = req.path.split('/')[2];
+            const bug = await BugDB.findOne({
+                where: {
+                    id: bugId
+                }
+            })
+            const bugDB = await BugDB.update(
+                {status: !bug.status},
+                {where: { id: bugId } }
+                );
+            res.status(200).send({
+                message: "Status for bug " + bugId + " updated."
+            });
+        } catch(error){
+            console.log(error);
+            res.status(500).send({
+                message: "Error updating bug!"
+            })
+        }
+   },
+   updateLinkResolve: async (req, res) => {
+    try{
+        const link = req.body.linkResolve;
+        if(!link || !link.includes("https://")){
+            res.status(400).send("It requiers a link");
+            
+        } else {
+            let bugId = req.path.split('/')[2];
+            const bug = await BugDB.findOne({
+                where: {
+                    id: bugId
+                }
+            })
+            const bugDB = await BugDB.update(
+                {linkResolve: req.body.linkResolve},
+                {where: { id: bugId } }
+                );
+            res.status(200).send({
+                message: "Link resolve for bug " + bugId + " updated."
+            });
+        }
+    } catch(error){
+        console.log(error);
+        res.status(500).send({
+            message: "Error updating bug!"
+        })
+    }
+},
 
     
 

@@ -8,40 +8,48 @@ const controller = {
     addProject: async (req, res) => {
         const project = {
             name: req.body.name,
+            repository: req.body.repository,
             userId: req.body.userId
         }
-
-        if(!project.name || !project.userId){
-            res.status(400).send("name and userId must be completed");
+        let err = true;
+        if(!project.name || !project.userId || !project.repository){
+            res.status(400).send("name, userId, repository must be completed");
             err = false;
         }
-        try{
-            const findProject = await ProjectDB.findOne({
-                where: {
-                    name: project.name
+
+        if(project.repository && !project.repository.includes("https://")){
+            res.status(400).send("It requiers a link");
+            err = false;
+        }
+        if(err){
+            try{
+                const findProject = await ProjectDB.findOne({
+                    where: {
+                        name: project.name
+                    }
+                })
+                if(findProject){
+                    throw new Error("exists");
                 }
-            })
-            if(findProject){
-                throw new Error("exists");
+
+            } catch(err){
+                console.log(err);
+                res.status(500).send({
+                    message: "Name already registered!"
+                })
             }
 
-        } catch(err){
-            console.log(err);
-            res.status(500).send({
-                message: "Name already registered!"
-            })
-        }
-
-        try{
-            const projDB = await ProjectDB.create(project);
-            res.status(200).send({
-                message: "Project added."
-            })
-        } catch(error){
-            console.log(error);
-            res.status(500).send({
-                message: "Error creating new project!"
-            })
+            try{
+                const projDB = await ProjectDB.create(project);
+                res.status(200).send({
+                    message: "Project added."
+                })
+            } catch(error){
+                console.log(error);
+                res.status(500).send({
+                    message: "Error creating new project!"
+                })
+            }
         }
     },
 

@@ -17,18 +17,18 @@ const controller = {
             res.status(400).send("projectId & userId must be completed");
             err = false;
         }
-
-        try{
-            const newMp = await MpDB.create(mp);
-            res.status(200).send({
-                message: "Mp added."
-            })
-        } catch(error){
-            console.log(error);
-            res.status(500).send({
-                message: "Error creating new mp!"
-            })
-        }
+        if(err)
+            try{
+                const newMp = await MpDB.create(mp);
+                res.status(200).send({
+                    message: "Mp added."
+                })
+            } catch(error){
+                console.log(error);
+                res.status(500).send({
+                    message: "Error creating new mp!"
+                })
+            }
     },
 
     getAllMps: async(req, res) => {
