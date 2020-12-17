@@ -69,12 +69,12 @@ const controller = {
                 }
             })
             res.status(200).send({
-                message: "Mp" + mpId + "deleted."
+                message: "Mp " + mpId + " deleted."
             });
         } catch(error){
             console.log(error);
             res.status(500).send({
-                message: "Error deleting user!"
+                message: "Error deleting mp!"
             })
         }
     }

@@ -81,7 +81,7 @@ const controller = {
         }catch(error){
             console.log(error);
             res.status(500).send({
-                message: "Error selecting one users!"
+                message: "Error selecting one user!"
             })
         }
     },
