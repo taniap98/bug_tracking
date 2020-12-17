@@ -10,9 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     });
     MP.associate = models => {
         MP.belongsTo(models.user, {
-            as: 'user',
+            as: 'user', //userId
             foreignKey: "id"
-        });
+        })
         MP.belongsTo(models.project, {
             as: 'project',
             foreignKey: "id"
