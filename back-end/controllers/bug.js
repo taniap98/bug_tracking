@@ -16,7 +16,7 @@ const controller = {
         }
 
         let err = true;
-        if(!bug.description || !bug.linkCommit || !bug.status || !bug.linkResolve){
+        if(!bug.description || !bug.linkCommit || !bug.status){
             res.status(400).send("all the fields should be completed");
             err = false;
         }
@@ -36,7 +36,7 @@ const controller = {
             err = false;
         }
 
-        if(!bug.linkCommit.includes("https://")){
+        if(bug.linkCommit && !bug.linkCommit.includes("https://")){
             res.status(400).send("It requiers a link");
             err = false;
         }
@@ -106,6 +106,8 @@ const controller = {
                 })
             }
     },
+
+   
 
     
 
