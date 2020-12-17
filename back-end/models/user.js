@@ -14,10 +14,12 @@ module.exports = (sequelize, DataTypes) => {
     lastName: DataTypes.STRING,
     nrMP: DataTypes.INTEGER,
     nrTST: DataTypes.INTEGER
+
     });
 
     User.associate = models => {
         User.hasMany(models.project, {
+            
             onDelete: "cascade"
         });
         User.hasOne(models.tst, {

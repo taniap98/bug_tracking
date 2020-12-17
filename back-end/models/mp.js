@@ -6,16 +6,18 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             allowNull: false
         },
+        userId: DataTypes.INTEGER,
+        projectId: DataTypes.INTEGER
 
     });
     MP.associate = models => {
         MP.belongsTo(models.user, {
             as: 'user', //userId
-            foreignKey: "id"
-        })
+            foreignKey: "userId"
+        });
         MP.belongsTo(models.project, {
             as: 'project',
-            foreignKey: "id"
+            foreignKey: "projectId"
         })
     };
     return MP;

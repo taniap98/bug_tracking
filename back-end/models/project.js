@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         name: DataTypes.STRING,
+        userId: DataTypes.INTEGER
 
     });
     Project.associate = models => {
@@ -18,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         });
         Project.belongsTo(models.user, {
             as: 'user',
-            foreignKey: "id"
+            foreignKey: "userId"
         });
     };
    return Project;

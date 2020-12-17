@@ -12,17 +12,19 @@ module.exports = (sequelize, DataTypes) => {
         description: DataTypes.STRING,
         linkCommit: DataTypes.STRING,
         status: DataTypes.BOOLEAN,
-        linkResolve: DataTypes.STRING
+        linkResolve: DataTypes.STRING,
+        tstId: DataTypes.INTEGER,
+        projectId: DataTypes.INTEGER
     });
 
     Bug.associate = models => {
         Bug.belongsTo(models.tst, {
             as: 'tst',
-            foreignKey: "id"
+            foreignKey: "tstId"
         })
         Bug.belongsTo(models.project, {
             as: 'project',
-            foreignKey: "id"
+            foreignKey: "projectId"
         })
     };
     return Bug;

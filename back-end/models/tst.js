@@ -6,6 +6,8 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             allowNull: false
         },
+        userId: DataTypes.INTEGER,
+        projectId: DataTypes.INTEGER
 
     });
     TST.associate = models => {
@@ -14,11 +16,11 @@ module.exports = (sequelize, DataTypes) => {
         });
         TST.belongsTo(models.user, {
             as: 'user',
-            foreignKey: "id"
+            foreignKey: "userId"
         });
         TST.belongsTo(models.project, {
             as: 'project',
-            foreignKey: "id"
+            foreignKey: "projectId"
         });
 
     };
