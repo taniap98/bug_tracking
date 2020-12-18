@@ -9,7 +9,7 @@ const tstDB = require("../models").tst;
 const controller = {
     checkAuth: async(req, res, next) => {
         if (req.isAuthenticated()) {
-          return res.redirect("/api/alreadyAuth");
+            res.redirect("/api/alreadyAuth");
         }
         return next();
     },
@@ -58,7 +58,6 @@ const controller = {
             }
             return next();
         } catch(err){
-            //return res.redirect("/api/notAllowed");
             console.log("err");
         }
     },
@@ -75,16 +74,6 @@ const controller = {
             for(tst in tsts){
                 projectIDs.push(tsts[tst].dataValues.projectId);
             }
-            
-            // const findTST = await tstDB.findOne({
-            //     where: {
-                    
-            //         userId: req.session.passport.user,
-            //         projectId: bug.projectId
-            //     }
-            // });
-            console.log(projectIDs);
-            console.log(req.body.projectId);
             if(!projectIDs.includes(req.body.projectId)){
                 return res.redirect("/api/notAllowed");
             }
@@ -121,6 +110,12 @@ router.get("/notAuth", async (req, res) => {
         .send({ message: "You must authenticate to access this route." });
 });
 
+router.get("/alreadyAuth", async (req, res) => {
+    res
+        .status(401)
+        .send({ message: "You are already logged in." });
+});
+
 router.post(
     "/login",
     controller.checkAuth,
@@ -132,7 +127,7 @@ router.post(
 
 router.delete("/logout", async (req, res) => {
     req.logOut();
-    res.redirect("/api/logout");
+    res.status(200).send({message: "Logged out!"});
 });
 
 

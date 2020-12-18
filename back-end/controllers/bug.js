@@ -5,7 +5,6 @@ const MpDB = require("../models").mp;
 
 const express = require("express");
 const router = express.Router();
-//const passport = require("passport");
 
 
 const controller = {
@@ -174,13 +173,9 @@ const controller = {
             }
         })
         const projectIDs = [];
-        //console.log(typeof(mps));
-        //mps.foreach(mp => console.log(mp));
         for(mp in mps){
             projectIDs.push(mps[mp].dataValues.projectId);
-            //console.log(mps[mp].dataValues.projectId);
         }
-       console.log(projectIDs);
         const bugs = await BugDB.findAll({
             where: {
                 projectId: projectIDs 
