@@ -3,6 +3,8 @@ const router = express.Router();
 const passport = require("passport");
 
 const mpDB = require("../models").mp;
+const bugDB = require("../models").bug;
+const tstDB = require("../models").tst;
 
 const controller = {
     checkAuth: async(req, res, next) => {
@@ -19,6 +21,31 @@ const controller = {
         res.redirect("/api/notAuth");
     },
 
+    checkIfMPOnThisProject: async(req, res, next) => {
+        try{
+            
+            const bug = await bugDB.findOne({
+                where: {
+                    id: req.params.id
+                }
+            });
+            
+            const findMP = await mpDB.findOne({
+                where: {
+                    
+                    userId: req.session.passport.user,
+                    projectId: bug.projectId
+                }
+            });
+            if(!findMP){
+                return res.redirect("/api/notAllowed");
+            }
+            return next();
+        } catch(err){
+            res.status(500).send({message: err});
+            console.log("err");
+        }
+    },
     checkIfMP: async(req, res, next) => {
         try{
             const findMP = await mpDB.findOne({
@@ -34,7 +61,39 @@ const controller = {
             //return res.redirect("/api/notAllowed");
             console.log("err");
         }
-    }
+    },
+    checkIfTSTOnThisProject: async(req, res, next) => {
+        try{
+            
+            const tsts = await tstDB.findAll({
+                where: {
+                    userId: req.session.passport.user
+                }
+            })
+            const projectIDs = [];
+
+            for(tst in tsts){
+                projectIDs.push(tsts[tst].dataValues.projectId);
+            }
+            
+            // const findTST = await tstDB.findOne({
+            //     where: {
+                    
+            //         userId: req.session.passport.user,
+            //         projectId: bug.projectId
+            //     }
+            // });
+            console.log(projectIDs);
+            console.log(req.body.projectId);
+            if(!projectIDs.includes(req.body.projectId)){
+                return res.redirect("/api/notAllowed");
+            }
+            return next();
+        } catch(err){
+            res.status(500).send({message: err});
+            console.log("err");
+        }
+    },
 }
 
 router.get("/success", async (req, res) => {

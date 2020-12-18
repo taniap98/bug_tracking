@@ -1,9 +1,11 @@
 const BugDB = require("../models").bug;
 const TstDB = require("../models").tst;
 const ProjectDB = require("../models").project;
+const MpDB = require("../models").mp;
 
 const express = require("express");
 const router = express.Router();
+//const passport = require("passport");
 
 
 const controller = {
@@ -13,8 +15,7 @@ const controller = {
             priority: req.body.priority,
             description: req.body.description,
             linkCommit: req.body.linkCommit,
-            status: req.body.status,
-            linkResolve: req.body.linkResolve,
+            status: false,
             tstId: req.body.tstId,
             projectId: req.body.projectId
         }
@@ -44,7 +45,7 @@ const controller = {
                 console.log(err);
         }
 
-        if(!bug.description || !bug.linkCommit || !bug.status){
+        if(!bug.description || !bug.linkCommit){
             res.status(400).send("all the fields should be completed");
             err = false;
         }
@@ -137,19 +138,26 @@ const controller = {
 
     updateStatus: async (req, res) => {
         try{
-            let bugId = req.path.split('/')[3];
-            const bug = await BugDB.findOne({
-                where: {
-                    id: bugId
-                }
-            })
-            const bugDB = await BugDB.update(
-                {status: !bug.status},
-                {where: { id: bugId } }
-                );
-            res.status(200).send({
-                message: "Status for bug " + bugId + " updated."
-            });
+            const link = req.body.linkResolve;
+            if(!link || !link.includes("https://")){
+                res.status(400).send("It requiers a link");
+                
+            } else {
+                let bugId = req.path.split('/')[3];
+                const bug = await BugDB.findOne({
+                    where: {
+                        id: bugId
+                    }
+                })
+                const bugDB = await BugDB.update(
+                    {status: true,
+                    linkResolve: link},
+                    {where: { id: bugId } }
+                    );
+                res.status(200).send({
+                    message: "Status for bug " + bugId + " updated."
+                });
+            }
         } catch(error){
             console.log(error);
             res.status(500).send({
@@ -157,34 +165,35 @@ const controller = {
             })
         }
    },
-   updateLinkResolve: async (req, res) => {
+
+   seeMyBugs: async (req, res) => {
     try{
-        const link = req.body.linkResolve;
-        if(!link || !link.includes("https://")){
-            res.status(400).send("It requiers a link");
-            
-        } else {
-            let bugId = req.path.split('/')[3];
-            const bug = await BugDB.findOne({
-                where: {
-                    id: bugId
-                }
-            })
-            const bugDB = await BugDB.update(
-                {linkResolve: req.body.linkResolve},
-                {where: { id: bugId } }
-                );
-            res.status(200).send({
-                message: "Link resolve for bug " + bugId + " updated."
-            });
+        const mps = await MpDB.findAll({
+            where: {
+                userId: req.session.passport.user
+            }
+        })
+        const projectIDs = [];
+        //console.log(typeof(mps));
+        //mps.foreach(mp => console.log(mp));
+        for(mp in mps){
+            projectIDs.push(mps[mp].dataValues.projectId);
+            //console.log(mps[mp].dataValues.projectId);
         }
+       console.log(projectIDs);
+        const bugs = await BugDB.findAll({
+            where: {
+                projectId: projectIDs 
+            }
+        });
+        res.status(200).send(bugs);
     } catch(error){
         console.log(error);
         res.status(500).send({
-            message: "Error updating bug!"
+            message: "Error selecting all the bugs!"
         })
     }
-},
+   },
 
     
 
