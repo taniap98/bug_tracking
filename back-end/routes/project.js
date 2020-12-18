@@ -2,10 +2,12 @@ const express = require("express");
 const router = express.Router();
 const projController = require("../controllers/project")
 
-router.post("/addproject", projController.addProject);
-router.get("/seeprojects", projController.getProjects);
-router.get("/project/:id", projController.getOneProject);
-router.delete("/deleteproject/:id", projController.deleteOneProject);
+const loginRouter= require("./login").controller;
+
+router.post("/project/add", loginRouter.checkNotAuth, projController.addProject);
+router.get("/project", loginRouter.checkNotAuth, projController.getProjects);
+router.get("/project/:id", loginRouter.checkNotAuth, projController.getOneProject);
+router.delete("/project/delete/:id", loginRouter.checkNotAuth, projController.deleteOneProject);
 
 
 module.exports = router;

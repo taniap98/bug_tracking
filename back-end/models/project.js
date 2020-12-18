@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         name: DataTypes.STRING,
-        respository: DataTypes.STRING,
+        repository: DataTypes.STRING,
         userId: DataTypes.INTEGER
 
     });

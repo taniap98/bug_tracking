@@ -6,6 +6,7 @@ const projRouter = require('./project')
 const tstRouter = require('./tst')
 const mpRouter = require('./mp')
 const otherRouter = require('./other')
+const loginRouter = require('./login').router
 
 
 if(process.env.NODE_ENV !== 'production') {
@@ -17,5 +18,6 @@ router.use('/', bugRouter);
 router.use('/', projRouter);
 router.use('/', tstRouter);
 router.use('/', mpRouter);
+router.use('/', loginRouter);
 
 module.exports = router

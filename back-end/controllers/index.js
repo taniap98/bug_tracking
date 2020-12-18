@@ -5,6 +5,7 @@ const mp = require("./mp");
 const tst = require("./tst");
 const other = require('./other')
 
+
 const controllers = {
     user,
     bug,

@@ -2,10 +2,12 @@ const express = require("express");
 const router = express.Router();
 const mpController = require("../controllers/mp")
 
-router.post('/addmp', mpController.addMp);
-router.get('/mps', mpController.getAllMps);
-router.get('/mp/:id', mpController.getOneMp);
-router.delete('/deletemp/:id', mpController.deleteOneMp);
+const loginRouter = require("./login").controller;
+
+router.post('/mp/', loginRouter.checkNotAuth, mpController.addMp);
+router.get('/mp', loginRouter.checkNotAuth, mpController.getAllMps);
+router.get('/mp/:id', loginRouter.checkNotAuth, mpController.getOneMp);
+router.delete('/mp/delete/:id', loginRouter.checkNotAuth, mpController.deleteOneMp);
 
 
 
