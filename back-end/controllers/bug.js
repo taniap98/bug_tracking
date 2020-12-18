@@ -73,7 +73,7 @@ const controller = {
 
     getOneBug: async(req, res) => {
         try{
-        let bugId = req.path.split('/')[2];
+        let bugId = req.path.split('/')[3];
         const bug = await BugDB.findOne({
             where: {
                 id: bugId
@@ -90,7 +90,7 @@ const controller = {
 
     deleteOneBug: async(req, res) => {
         try{
-            let bugId = req.path.split('/')[2];
+            let bugId = req.path.split('/')[3];
             const bug = await BugDB.destroy({
                 where: {
                     id: bugId
@@ -109,7 +109,7 @@ const controller = {
 
     updateStatus: async (req, res) => {
         try{
-            let bugId = req.path.split('/')[2];
+            let bugId = req.path.split('/')[3];
             const bug = await BugDB.findOne({
                 where: {
                     id: bugId

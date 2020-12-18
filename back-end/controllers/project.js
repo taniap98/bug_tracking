@@ -67,7 +67,7 @@ const controller = {
 
     getOneProject: async(req, res) => {
         try{
-            let projectId = req.path.split('/')[2];
+            let projectId = req.path.split('/')[3];
             const project = await ProjectDB.findOne({
                 where: {
                     id: projectId
@@ -84,7 +84,7 @@ const controller = {
 
     deleteOneProject: async(req, res) => {
         try{
-            let projectId = req.path.split('/')[2];
+            let projectId = req.path.split('/')[3];
             const project = await ProjectDB.destroy({
                 where: {
                     id: projectId

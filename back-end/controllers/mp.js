@@ -45,7 +45,7 @@ const controller = {
 
     getOneMp: async(req, res) => {
         try{
-        let mpId = req.path.split('/')[2];
+        let mpId = req.path.split('/')[3];
         const mp = await MpDB.findOne({
             where: {
                 id: mpId
@@ -62,7 +62,7 @@ const controller = {
 
     deleteOneMp: async(req, res) => {
         try{
-            let mpId = req.path.split('/')[2];
+            let mpId = req.path.split('/')[3];
             const mp = await MpDB.destroy({
                 where: {
                     id: mpId

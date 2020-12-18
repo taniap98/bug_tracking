@@ -38,7 +38,7 @@ const controller = {
 
     getOneTst: async(req, res) => {
         try{
-            let tstId = req.path.split('/')[2];
+            let tstId = req.path.split('/')[3];
             const tst = await TstDB.findOne({
                 where: {
                     id: tstId
@@ -55,7 +55,7 @@ const controller = {
     
     deleteOneTst: async(req, res) => {
         try{
-            let tstId = req.path.split('/')[2];
+            let tstId = req.path.split('/')[3];
             const tst = await TstDB.destroy({
                 where: {
                     id: tstId
