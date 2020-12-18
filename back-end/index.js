@@ -39,7 +39,6 @@ app.use(passport.session());
 
 app.use(bodyParser.json())
 
-//app.use(flash());
 app.use(session({
     secret: process.env.secret,
     resave: false,
@@ -55,9 +54,7 @@ router.use((req, res, next) => {
 });
 
 
+var port = 8080;
+app.listen(port);
+console.log("App is runing on port " + port);
 
-//db.sequelize.sync().then((req) => {
-    var port = 8080;
-    app.listen(port);
-    console.log("App is runing on port " + port);
-//});

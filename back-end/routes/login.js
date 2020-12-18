@@ -58,7 +58,6 @@ const controller = {
             }
             return next();
         } catch(err){
-            //return res.redirect("/api/notAllowed");
             console.log("err");
         }
     },
@@ -75,16 +74,6 @@ const controller = {
             for(tst in tsts){
                 projectIDs.push(tsts[tst].dataValues.projectId);
             }
-            
-            // const findTST = await tstDB.findOne({
-            //     where: {
-                    
-            //         userId: req.session.passport.user,
-            //         projectId: bug.projectId
-            //     }
-            // });
-            console.log(projectIDs);
-            console.log(req.body.projectId);
             if(!projectIDs.includes(req.body.projectId)){
                 return res.redirect("/api/notAllowed");
             }
