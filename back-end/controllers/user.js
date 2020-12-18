@@ -71,7 +71,7 @@ const controller = {
 
     getOneUser: async(req, res) => {
         try{
-            let userId = req.path.split('/')[2];
+            let userId = req.path.split('/')[3];
             const user = await UserDB.findOne({
                 where: {
                     id: userId
@@ -88,7 +88,7 @@ const controller = {
 
     deleteOneUser: async(req, res) => {
         try{
-            let userId = req.path.split('/')[2];
+            let userId = req.path.split('/')[3];
             const user = await UserDB.destroy({
                 where: {
                     id: userId
