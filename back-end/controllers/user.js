@@ -2,13 +2,14 @@ const UserDB = require("../models").user;
 
 const express = require("express");
 const router = express.Router();
+const bcrypt = require('bcrypt');
 
 
 const controller = {
     addUser: async(req, res) => {
         const user = {
             email: req.body.email,
-            password: req.body.password,
+            password: await bcrypt.hash(req.body.password, 10),
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             nrMP: req.body.nrMP,
