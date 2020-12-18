@@ -1,4 +1,6 @@
 const TstDB = require("../models").tst;
+const UserDB = require("../models").user;
+const ProjectDB = require("../models").project;
 
 const express = require("express");
 const router = express.Router();
@@ -11,6 +13,32 @@ const controller = {
             projectId: req.body.projectId
         }
 
+        let err = true;
+        try{
+            const findUser = await UserDB.findOne({
+                where: {
+                    id: tst.userId
+                }
+            })
+
+            const findProject = await ProjectDB.findOne({
+                where: {
+                    id: tst.projectId
+                }
+            })
+
+            if(!findUser || !findProject){
+                res.status(400).send({
+                    message: "UserId or ProjectId doesn't exist!"
+            })
+                err = false;
+        }
+        }catch(err){
+                console.log(err);
+
+        }
+ 
+    if(err){
         try{
             const newTst = await TstDB.create(tst);
             res.status(200).send({
@@ -22,7 +50,7 @@ const controller = {
                 message: "Error creating new tst!"
             })
         }
-    },
+    }},
 
     getAllTsts: async(req, res) => {
         try{
@@ -38,7 +66,7 @@ const controller = {
 
     getOneTst: async(req, res) => {
         try{
-            let tstId = req.path.split('/')[2];
+            let tstId = req.path.split('/')[3];
             const tst = await TstDB.findOne({
                 where: {
                     id: tstId
@@ -55,7 +83,7 @@ const controller = {
     
     deleteOneTst: async(req, res) => {
         try{
-            let tstId = req.path.split('/')[2];
+            let tstId = req.path.split('/')[3];
             const tst = await TstDB.destroy({
                 where: {
                     id: tstId

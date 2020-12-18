@@ -1,4 +1,6 @@
 const BugDB = require("../models").bug;
+const TstDB = require("../models").tst;
+const ProjectDB = require("../models").project;
 
 const express = require("express");
 const router = express.Router();
@@ -12,10 +14,36 @@ const controller = {
             description: req.body.description,
             linkCommit: req.body.linkCommit,
             status: req.body.status,
-            linkResolve: req.body.linkResolve
+            linkResolve: req.body.linkResolve,
+            tstId: req.body.tstId,
+            projectId: req.body.projectId
         }
 
         let err = true;
+
+        try{
+            const findTst = await TstDB.findOne({
+                where: {
+                    id: bug.tstId
+                }
+            })
+
+            const findProject = await ProjectDB.findOne({
+                where: {
+                    id: bug.projectId
+                }
+            })
+
+            if(!findTst || !findProject){
+                res.status(400).send({
+                    message: "TstId or ProjectId doesn't exist!"
+            })
+                err = false;
+        }
+        }catch(err){
+                console.log(err);
+        }
+
         if(!bug.description || !bug.linkCommit || !bug.status){
             res.status(400).send("all the fields should be completed");
             err = false;
@@ -73,7 +101,7 @@ const controller = {
 
     getOneBug: async(req, res) => {
         try{
-        let bugId = req.path.split('/')[2];
+        let bugId = req.path.split('/')[3];
         const bug = await BugDB.findOne({
             where: {
                 id: bugId
@@ -90,7 +118,7 @@ const controller = {
 
     deleteOneBug: async(req, res) => {
         try{
-            let bugId = req.path.split('/')[2];
+            let bugId = req.path.split('/')[3];
             const bug = await BugDB.destroy({
                 where: {
                     id: bugId
@@ -109,7 +137,7 @@ const controller = {
 
     updateStatus: async (req, res) => {
         try{
-            let bugId = req.path.split('/')[2];
+            let bugId = req.path.split('/')[3];
             const bug = await BugDB.findOne({
                 where: {
                     id: bugId
@@ -136,7 +164,7 @@ const controller = {
             res.status(400).send("It requiers a link");
             
         } else {
-            let bugId = req.path.split('/')[2];
+            let bugId = req.path.split('/')[3];
             const bug = await BugDB.findOne({
                 where: {
                     id: bugId

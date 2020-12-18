@@ -1,4 +1,5 @@
 const ProjectDB = require("../models").project;
+const UserDB = require("../models").user;
 
 const express = require("express");
 const router = express.Router();
@@ -12,6 +13,25 @@ const controller = {
             userId: req.body.userId
         }
         let err = true;
+
+        try{
+            const findUser = await UserDB.findOne({
+                where: {
+                    id: project.userId
+                }
+            })
+
+            if(!findUser){
+                res.status(400).send({
+                    message: "UserId doesn't exist!"
+            })
+                err = false;
+        }
+        }catch(err){
+                console.log(err);
+
+        }
+
         if(!project.name || !project.userId || !project.repository){
             res.status(400).send("name, userId, repository must be completed");
             err = false;
@@ -67,7 +87,7 @@ const controller = {
 
     getOneProject: async(req, res) => {
         try{
-            let projectId = req.path.split('/')[2];
+            let projectId = req.path.split('/')[3];
             const project = await ProjectDB.findOne({
                 where: {
                     id: projectId
@@ -84,7 +104,7 @@ const controller = {
 
     deleteOneProject: async(req, res) => {
         try{
-            let projectId = req.path.split('/')[2];
+            let projectId = req.path.split('/')[3];
             const project = await ProjectDB.destroy({
                 where: {
                     id: projectId

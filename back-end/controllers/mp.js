@@ -1,4 +1,6 @@
 const MpDB = require("../models").mp;
+const UserDB = require("../models").user;
+const ProjectDB = require("../models").project;
 
 const express = require("express");
 const router = express.Router();
@@ -13,6 +15,31 @@ const controller = {
         }
 
         let err = true;
+
+        try{
+            const findUser = await UserDB.findOne({
+                where: {
+                    id: mp.userId
+                }
+            })
+
+            const findProject = await ProjectDB.findOne({
+                where: {
+                    id: mp.projectId
+                }
+            })
+
+            if(!findUser || !findProject){
+                res.status(400).send({
+                    message: "UserId or ProjectId doesn't exist!"
+            })
+                err = false;
+        }
+        }catch(err){
+                console.log(err);
+
+        }
+
         if(!mp.projectId || !mp.userId){
             res.status(400).send("projectId & userId must be completed");
             err = false;
@@ -45,7 +72,7 @@ const controller = {
 
     getOneMp: async(req, res) => {
         try{
-        let mpId = req.path.split('/')[2];
+        let mpId = req.path.split('/')[3];
         const mp = await MpDB.findOne({
             where: {
                 id: mpId
@@ -62,7 +89,7 @@ const controller = {
 
     deleteOneMp: async(req, res) => {
         try{
-            let mpId = req.path.split('/')[2];
+            let mpId = req.path.split('/')[3];
             const mp = await MpDB.destroy({
                 where: {
                     id: mpId
