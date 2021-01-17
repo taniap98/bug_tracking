@@ -88,6 +88,7 @@ const controller = {
 router.get("/success", async (req, res) => {
     console.log("Login successfully");
     res.status(200).send({logedInUser: req.session.passport.user});
+   
 });
   
 router.get("/fail", async (req, res) => {
