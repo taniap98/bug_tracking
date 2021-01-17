@@ -1,51 +1,74 @@
 import React, {Component} from 'react';
 import {withRouter, useHistory} from 'react-router-dom';
+import axios from "axios";
 
-const Users = ({ user }) => {
+const Project = ({ project }) => {
+
     const history = useHistory();
     return (
       <div className="box" onClick={()=>{
+        localStorage.setItem("projName", project.name);
+        localStorage.setItem("projRepository", project.repository);
+        localStorage.setItem("projId", project.id);
         history.push("/seeproject")
     }}>
-        <p className="subtitle">{user.name}</p>
-        <p>{user.email}</p>
+        <p className="subtitle">{project.name}</p>
+        <p>{project.repository}</p>
       </div>
     );
   };
   
   class ProjectList extends Component {
-    state = {
-      users: [],
-      isLoading: true,
-      errors: null
-    };
-  
-    fetchUsers() {
-      fetch(`https://jsonplaceholder.typicode.com/users`)
-        .then(response => response.json())
-        .then(data =>
-          this.setState({
-            users: data,
-            isLoading: false
-          })
-        )
-        .catch(error => this.setState({ error, isLoading: false }));
+
+    constructor(props){
+      super(props);
+      this.state = {
+        projects: []
+      }
+    }
+    // state = {
+    //   projects: [],
+    //   isLoading: true,
+    //   errors: null
+    // };
+    componentDidMount(){
+      
+      axios.get(`http://localhost:8080/api/project`,  {headers: {'Authentication': localStorage.userId}})
+        .then(res => {
+          console.log(res.data);
+          const projects = res.data;
+          this.setState({projects})
+        })
+        .catch(err => console.log(err))
     }
   
-    componentDidMount() {
-      this.fetchUsers();
-    }
+    // fetchProjects() {
+    //   fetch(`http://localhost:8080/api/project`)
+    //     //.then(response => response.json())
+    //     .then(res =>
+    //       this.setState({
+    //         projects: res.data,
+    //         isLoading: false,
+    //         isMounted: false
+    //       })
+    //     )
+    //     .catch(error => this.setState({ error, isLoading: false }));
+    // }
+  
+    // componentDidMount() {
+    //   this.fetchProjects();
+    // }
    
     render() {
         const props = this.props;
 
-      const { isLoading, users } = this.state;
+      const { isLoading, projects } = this.state;
       return (
         <section className="section">
           <div className="container" >
             {!isLoading ? (
-              users.map(user => {
-                return <Users key={user.username} user={user} />;
+              this.state.projects.map(project => {
+                return <Project key={project.id} project={project} />;
               })
             ) : (
               <p>Loading...</p>
