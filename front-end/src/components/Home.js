@@ -21,11 +21,17 @@ class Home extends Component {
         console.log(this.state);
         axios.post("http://localhost:8080/api/login", this.state,  { withCredentials: true })
         .then(res => {
-            localStorage.setItem('userId', res.data["logedInUser"]);      
-            this.props.history.push("/about")
+
+            if(res.data["ok"]){
+                localStorage.setItem('userId', res.data["logedInUser"]);      
+                this.props.history.push("/about")
+            } else {
+                alert(res.data["message"]);
+            }
+            
         })
         .catch(e =>{
-            alert("Incorect email & password");
+            
         })
     }
    

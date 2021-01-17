@@ -5,6 +5,8 @@ const passport = require("passport");
 const mpDB = require("../models").mp;
 const bugDB = require("../models").bug;
 const tstDB = require("../models").tst;
+const userDB = require("../models").user;
+const bcrypt = require("bcrypt");
 
 const controller = {
     checkAuth: async(req, res, next) => {
@@ -15,7 +17,7 @@ const controller = {
     },
     
     checkNotAuth: async(req, res, next) =>{
-        if (req.isAuthenticated()) {
+        if (req.headers.authorization) {
           return next();
         }
         res.redirect("/api/notAuth");
@@ -91,15 +93,15 @@ router.get("/success", async (req, res) => {
    
 });
   
-router.get("/fail", async (req, res) => {
-    res
-        .status(401)
-        .send({ message: "Email & Password combination does not match." });
-});
+// router.get("/fail", async (req, res) => {
+//     res
+//         .status(401)
+//         .send({ message: "Email & Password combination does not match." });
+// });
 
 router.get("/notAllowed", async (req, res) => {
     res
-        .status(401)
+        
         .send({ message: "You don't have access." });
 });
 
@@ -107,7 +109,7 @@ router.get("/notAllowed", async (req, res) => {
 
 router.get("/notAuth", async (req, res) => {
     res
-        .status(401)
+    
         .send({ message: "You must authenticate to access this route." });
 });
 
@@ -117,14 +119,43 @@ router.get("/alreadyAuth", async (req, res) => {
         .send({ message: "You are already logged in." });
 });
 
+// router.post(
+//     "/login",
+//     controller.checkAuth,
+//     passport.authenticate("local", {
+//         successRedirect: "/api/success",
+//         failureRedirect: "/api/fail",
+//     })
+// );
+
 router.post(
-    "/login",
-    controller.checkAuth,
-    passport.authenticate("local", {
-        successRedirect: "/api/success",
-        failureRedirect: "/api/fail",
-    })
-);
+    "/login", async (req, res) => {
+        console.log(req.body);
+        const {email, password} = req.body;
+        try{
+            const findUser = await userDB.findOne({
+                where: {
+                    email: email
+                }
+            })
+            try {
+               
+                const isOk = await bcrypt.compare(password, findUser.password);
+                if(isOk){
+                    res.status(200).send({logedInUser: findUser.id, ok: true});
+                } else {
+                    res.send({message: "Password incorrect", ok: false});
+                }
+              } catch (err) {
+                    res.send({message: "Password irimail invalid", ok: false});
+            }
+        
+        }
+        catch(err){
+            res.send({message: "Email invalid", ok: false});
+        }
+    }
+)
 
 router.delete("/logout", async (req, res) => {
     req.logOut();

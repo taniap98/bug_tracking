@@ -23,7 +23,12 @@ class SeeProject extends Component {
                     }}>
                         Add Bug
                     </Button>
+                    <div>
+                        <h3>{localStorage.projName}</h3>
+                        <a href={localStorage.projRepository}>{localStorage.projRepository}</a>
+                    </div>
             </div>
+
         )
     }
 }
