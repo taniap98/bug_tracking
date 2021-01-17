@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter, useHistory} from 'react-router-dom';
 
-
-
 const Users = ({ user }) => {
     const history = useHistory();
     return (
@@ -58,6 +56,4 @@ const Users = ({ user }) => {
     }
   }
   
-  
-
   export default withRouter(ProjectList);

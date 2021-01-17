@@ -13,7 +13,7 @@ class Nav extends Component {
                             <Button 
                             style={{color: "white"}}
                             onClick={() => {
-                                props.history.push("/")
+                                props.history.push("/about")
                             }}>
                                 Bug Tracking
                             </Button>
