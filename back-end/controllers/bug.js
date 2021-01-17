@@ -171,7 +171,7 @@ const controller = {
     try{
         const mps = await MpDB.findAll({
             where: {
-                userId: req.session.passport.user
+                userId: req.body.userId
             }
         })
         const projectIDs = [];
@@ -180,13 +180,13 @@ const controller = {
         }
         const bugs = await BugDB.findAll({
             where: {
-                projectId: projectIDs 
+                projectId: req.body.projectId 
             }
         });
         res.status(200).send(bugs);
     } catch(error){
         console.log(error);
-        res.status(500).send({
+        res.send({
             message: "Error selecting all the bugs!"
         })
     }

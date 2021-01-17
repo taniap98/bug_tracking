@@ -52,7 +52,7 @@ const controller = {
         try{
             const findMP = await mpDB.findOne({
                 where: {
-                    userId: req.session.passport.user
+                    userId: req.body.userId
                 }
             });
             if(!findMP){

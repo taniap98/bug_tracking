@@ -6,9 +6,9 @@ const loginRouter= require("./login").controller;
 
 
 router.post('/user/register', userController.addUser);
-router.get('/user', loginRouter.checkNotAuth, userController.getAllUsers);
-router.get('/user/:id', loginRouter.checkNotAuth, userController.getOneUser);
-router.delete('/user/delete/:id', loginRouter.checkNotAuth, userController.deleteOneUser);
+router.get('/user', userController.getAllUsers);
+router.get('/user/:id', userController.getOneUser);
+router.delete('/user/delete/:id', userController.deleteOneUser);
 
 
 

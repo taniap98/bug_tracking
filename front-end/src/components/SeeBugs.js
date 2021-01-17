@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {Typography} from '@material-ui/core';
+import BugList from './BugList';
 
 class SeeBugs extends Component {
     render(){
@@ -10,7 +11,8 @@ class SeeBugs extends Component {
                 <br></br>
                 <Typography variant="h6">See Bugs</Typography>
                 <br></br>
-            </div>
+                <div ><BugList /></div>
+            </div>  
         )
     }
 }

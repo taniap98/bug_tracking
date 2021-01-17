@@ -17,6 +17,15 @@ class Nav extends Component {
                             }}>
                                 Bug Tracking
                             </Button>
+                            <Button 
+                            style={{color: "white"}}
+                            onClick={() => {
+                                localStorage.clear();
+                                props.history.push("/")
+                            }}>
+                                Log out
+                            </Button>
+                            
                         </Typography>
                     </Toolbar>
                 </AppBar>
