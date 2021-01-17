@@ -8,6 +8,7 @@ import AddProject from './components/AddProject';
 import AddBug from './components/AddBug';
 import SeeProject from './components/SeeProject';
 import ProjectList from './components/ProjectList'
+import SeeBugs from './components/SeeBugs';
 
 
 
@@ -50,6 +51,12 @@ class App extends Component{
         <Route path="/projectList" exact strict component={() => {
           return (
             <div className="App"><ProjectList/></div>
+          )
+        }} /> 
+
+        <Route path="/seebugs" exact strict component={() => {
+          return (
+            <div className="App"><SeeBugs/></div>
           )
         }} /> 
 

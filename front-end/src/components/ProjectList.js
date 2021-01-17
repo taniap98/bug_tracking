@@ -2,9 +2,8 @@ import React, {Component} from 'react';
 import {withRouter, useHistory} from 'react-router-dom';
 import axios from "axios";
 
-
-
 const Project = ({ project }) => {
+
     const history = useHistory();
     return (
       <div className="box" onClick={()=>{
@@ -80,6 +79,4 @@ const Project = ({ project }) => {
     }
   }
   
-  
-
   export default withRouter(ProjectList);

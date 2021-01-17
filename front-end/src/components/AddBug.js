@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import {Button, Typography, ButtonGroup} from '@material-ui/core';
+import {Typography} from '@material-ui/core';
 import axios from 'axios';
 
 class AddBug extends Component {
