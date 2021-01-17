@@ -3,6 +3,7 @@ import {withRouter} from 'react-router-dom';
 import {Button, Typography, ButtonGroup} from '@material-ui/core';
 import ListIcon from '@material-ui/icons/List';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import ProjectList from './ProjectList'
 
 class About extends Component {
     render(){
@@ -13,15 +14,7 @@ class About extends Component {
                 <Typography variant="h6">Homepage</Typography>
                 <br></br>
                 <ButtonGroup variant="contained">
-                    <Button 
-                    startIcon={<ListIcon/>} 
-                    color="primary" 
-                    size="small"
-                    onClick={() => {
-                        props.history.push("/about")
-                    }}>
-                        See Projects
-                    </Button>
+                   
 
                     <Button 
                     startIcon={<AddCircleIcon/>} 
@@ -34,7 +27,13 @@ class About extends Component {
                     </Button>
                 </ButtonGroup>
 
+                
+
+                <div ><ProjectList /></div>
+
             </div>
+
+        
         )
     }
 }
