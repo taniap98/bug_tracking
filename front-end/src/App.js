@@ -7,6 +7,7 @@ import Nav from './components/Nav';
 import AddProject from './components/AddProject';
 import AddBug from './components/AddBug';
 import SeeProject from './components/SeeProject';
+import ProjectList from './components/ProjectList'
 
 
 
@@ -43,6 +44,12 @@ class App extends Component{
         <Route path="/seeproject" exact strict component={() => {
           return (
             <div className="App"><SeeProject/></div>
+          )
+        }} /> 
+
+        <Route path="/projectList" exact strict component={() => {
+          return (
+            <div className="App"><ProjectList/></div>
           )
         }} /> 
 
