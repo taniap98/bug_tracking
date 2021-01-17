@@ -49,17 +49,19 @@ const controller = {
             err = false;
         }
 
-        if(typeof bug.severity === 'string' || bug.severity instanceof String || typeof bug.priority === 'string' || bug.priority instanceof String){
-            res.status(400).send("It must be a number between 1 and 5");
-            err = false;
-        } 
+        // if(typeof bug.severity === 'string' || bug.severity instanceof String || typeof bug.priority === 'string' || bug.priority instanceof String){
+        //     res.status(400).send("It must be a number between 1 and 5");
+        //     err = false;
+        // } 
+        const sev = parseInt(bug.severity);
+        const pri = parseInt(bug.priority);
 
-       if(5 < bug.severity  || bug.severity < 1 ) {
+       if(5 < sev  || sev < 1 ) {
             res.status(400).send("Severity out of bounds");
             err = false;
         }
 
-        if(5 < bug.priority  || bug.priority < 1 ){
+        if(5 < pri  || pri < 1 ){
             res.status(400).send("Priority out of bounds");
             err = false;
         }

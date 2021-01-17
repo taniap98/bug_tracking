@@ -9,11 +9,14 @@ async function initPassport(passport, getUserByEmail, getUserById) {
       return done(null, false, { message: "No user with this email" });
     }
     try {
-      if (bcrypt.compare(password, user.password)) {
+      bcrypt.compare(password, user.password, (err, res) => {
+        if(err)
+           return done(null, false, { message: "Password incorrect" });
+        if(!res)
+          return done(null, false, { message: "Password incorrect" });
+
         return done(null, user);
-      } else {
-        return done(null, false, { message: "Password incorrect" });
-      }
+      })  
     } catch (err) {
       return done(err);
     }
