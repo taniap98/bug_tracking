@@ -9,6 +9,7 @@ import AddBug from './components/AddBug';
 import SeeProject from './components/SeeProject';
 import ProjectList from './components/ProjectList'
 import SeeBugs from './components/SeeBugs';
+import SeeBug from './components/SeeBug';
 
 
 
@@ -58,7 +59,13 @@ class App extends Component{
           return (
             <div className="App"><SeeBugs/></div>
           )
-        }} /> 
+        }} />
+
+         <Route path="/seebug" exact strict component={() => {
+          return (
+            <div className="App"><SeeBug/></div>
+          )
+        }} />  
 
       </Switch>
       </BrowserRouter>

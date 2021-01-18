@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Button, Typography, ButtonGroup, Input } from '@material-ui/core';
+import { Button, Typography, ButtonGroup } from '@material-ui/core';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import BugReportIcon from '@material-ui/icons/BugReport';
 import axios from 'axios';
@@ -77,10 +77,10 @@ class SeeProject extends Component {
                     <input id="tst" type="radio" value="TST" name="option" onChange={() => {
                         this.state.tst = !this.state.tst;
                     }} />
-                    <label for="tst">TST</label>
-                </div>
-
+                    <label for="tst">TST</label> 
+                    <br></br>
                 <Button
+                    id="bb"
                     variant="contained"
                     size="small"
                     onClick={() => {
@@ -88,10 +88,14 @@ class SeeProject extends Component {
                     }}>
                     Submit
                 </Button>
+                </div>
+
+            
                 <br></br>
                 <br></br>
                 <div>
-                    <h3>{localStorage.projName}</h3>
+                    <h3>Project name: {localStorage.projName}</h3>
+                    <h3>Project repository:</h3>
                     <a href={localStorage.projRepository}>{localStorage.projRepository}</a>
                 </div>
 
