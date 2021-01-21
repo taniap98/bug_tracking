@@ -10,6 +10,7 @@ import SeeProject from './components/SeeProject';
 import ProjectList from './components/ProjectList'
 import SeeBugs from './components/SeeBugs';
 import SeeBug from './components/SeeBug';
+import Register from './components/Register';
 
 
 
@@ -19,9 +20,15 @@ class App extends Component{
       <BrowserRouter>
       <Nav />
       <Switch>
-        <Route path="/" exact strict component={() => {
+      <Route path="/" exact strict component={() => {
           return (
-            <div className="App"><Home></Home></div>
+            <div className="App"><Home/></div>
+          )
+        }} />  
+
+        <Route path="/register" exact strict component={() => {
+          return (
+            <div className="App"><Register></Register></div>
           )
         }} />
 
@@ -66,6 +73,8 @@ class App extends Component{
             <div className="App"><SeeBug/></div>
           )
         }} />  
+
+          
 
       </Switch>
       </BrowserRouter>

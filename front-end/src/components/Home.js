@@ -67,6 +67,15 @@ class Home extends Component {
                             onClick={() => {
                             }
                         } />
+                        <br></br>
+                        <input 
+                            id="bb"
+                            type="submit" 
+                            value="Register" 
+                            onClick={() => {
+                                props.history.push("/register")
+                            }
+                        } />
                     </form>
             </div>
         )
