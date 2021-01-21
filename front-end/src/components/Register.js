@@ -50,13 +50,14 @@ class Register extends Component {
         const props = this.props;
         const {email, password, firstName, lastName, nrMP, nrTST} = this.state;
         return (
-            <div>
+            <div id="login">
                 <br></br>
-                <Typography variant="h6">Register</Typography>
+                <Typography variant="h4">Register</Typography>
                 <br></br>
-                    <form onSubmit={this.handleSubmit}>
+                    <form className="login" id="register" onSubmit={this.handleSubmit}>
                         <label>Email: <br/>
                             <input 
+                                className="input"
                                 type="text" 
                                 name="email" 
                                 required 
@@ -65,6 +66,7 @@ class Register extends Component {
                         </label><br/>
                         <label>Password: <br/>
                             <input 
+                                className="input"
                                 type="password" 
                                 name="password" 
                                 required 
@@ -73,6 +75,7 @@ class Register extends Component {
                         </label><br/>
                         <label>First Name: <br/>
                             <input 
+                                className="input"
                                 type="text" 
                                 name="firstName" 
                                 required 
@@ -81,6 +84,7 @@ class Register extends Component {
                         </label><br/>
                         <label>Last Name: <br/>
                             <input 
+                                className="input"
                                 type="text" 
                                 name="lastName" 
                                 required 
@@ -89,6 +93,7 @@ class Register extends Component {
                         </label><br/>
                         <label>Number MP: <br/>
                             <input 
+                                className="input"
                                 type="number" 
                                 name="nrMP" 
                                 required 
@@ -98,6 +103,7 @@ class Register extends Component {
                         </label><br/>
                         <label>Number TST: <br/>
                             <input 
+                                className="input"
                                 type="number" 
                                 name="nrTST" 
                                 required 
@@ -107,6 +113,7 @@ class Register extends Component {
                         </label><br/>
                         <br></br>
                         <input 
+                            id="log"
                             type="submit" 
                             value="Register" 
                             onClick={() => {
@@ -115,7 +122,7 @@ class Register extends Component {
                         } />
                         <br></br>
                         <input 
-                            id="bb"
+                            id="log"
                             type="submit" 
                             value="Already registered? Login!" 
                             onClick={() => {

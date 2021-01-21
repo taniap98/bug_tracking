@@ -40,16 +40,17 @@ class SeeBug extends Component {
     render() {
         const props = this.props;
         return (
-            <div>
+            <div id="div">
                 <br></br>
-                <Typography variant="h6">See Bug</Typography>
+                <Typography variant="h4">See Bug</Typography>
                 <br></br>
+                <div className="list">
                     <h3>Bug severity: {localStorage.bugSev}</h3>
                     <h3>Bug priority: {localStorage.bugPri}</h3>
                     <h3>Bug description: {localStorage.bugDesc}</h3>
                     <h3>Link commit: </h3>
                     <a href={localStorage.bugLinkCom}>{localStorage.bugLinkCom}</a>
-
+                </div>
                 <div id="option">
                     <label className="lb">Choose the status:</label>
                     <label for="res">Resolved</label>
@@ -58,12 +59,12 @@ class SeeBug extends Component {
                     }} />
                     <br></br>
                     <label className="lb" for="linkResolve">Link Resolve:</label>
-                    <input id="linkResolve" type="url" onChange={(e) => {
+                    <input className="input" id="linkResolve" type="url" onChange={(e) => {
                         this.state.linkResolve = e.target.value;
                     }}></input>
                     <br></br>
                 <Button
-                    id="bb"
+                    id="log"
                     variant="contained"
                     size="small"
                     onClick={()=>{this.handleSubmit()}}>
@@ -71,7 +72,7 @@ class SeeBug extends Component {
                 </Button>
                 </div>
 
-               
+                <div className="gol"></div>
                 </div>
 
                 

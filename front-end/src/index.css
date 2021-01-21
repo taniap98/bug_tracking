@@ -1,3 +1,4 @@
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,6 +6,67 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: linear-gradient(140deg,rgb(51, 153, 255) 0%, rgb(229, 91, 141) 100%);
+  height: auto;
+
+}
+
+#login{
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+}
+
+.login{
+  height: 500px;
+  width: 520px;
+  margin: 0 auto;
+  border-radius: 5px;
+  box-shadow: 0px 4px 30px -5px rgba(0,0,0,0.65);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+#register{
+  height: 800px;
+}
+
+#bugy{
+  height:540px;
+}
+
+#log {
+  border: none;
+  border-radius: 30px;
+  color: #000000;
+  font-size: 16px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 20px;
+  margin-bottom: -30px;
+  box-shadow: 0px 4px 15px -5px rgba(0, 0, 0, 0.65);
+  transition: all 0.3s;
+}
+
+#log:hover {
+  background: #3F51B5;
+  box-shadow: 0px 5px 20px -3px rgba(0, 0, 0, 0.65);
+}
+
+label{
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.input{
+  padding: 10px;
+  margin-top: 8px;
+  border-radius: 10px;
+  border: none;
 }
 
 code {
@@ -20,7 +82,7 @@ code {
 
 .box{
   width: 500px;
-  border: #888888 1px solid;
+  border: #000000 1px solid;
  margin-top: 0.5%;
  border-radius: 10px;
  
@@ -31,7 +93,6 @@ code {
 }
 
 #option{
-  background-color: aliceblue;
   margin-top: 3%;
   margin-bottom: 10px;
   padding: 20px;
@@ -45,6 +106,27 @@ h3{
   margin-right: 15px;
 }
 
-#bb{
+.list{
+  width: 400px;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
   margin-top: 20px;
+  padding-bottom: 10px;
+}
+
+#div{
+  
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.gol{
+  height: 300px;
 }

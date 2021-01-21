@@ -40,16 +40,16 @@ class SeeProject extends Component {
     render() {
         const props = this.props;
         return (
-            <div>
+            <div id="div">
                 <br></br>
-                <Typography variant="h6">See Project</Typography>
+                <Typography variant="h4">See Project</Typography>
                 <br></br>
                 <ButtonGroup variant="contained">
                     <Button
                         variant="contained"
                         startIcon={<AddCircleIcon />}
                         color="primary"
-                        size="small"
+                        size="large"
                         onClick={() => {
                             props.history.push("/addbug")
                         }}>
@@ -60,13 +60,19 @@ class SeeProject extends Component {
                         variant="contained"
                         startIcon={<BugReportIcon />}
                         color="primary"
-                        size="small"
+                        size="large"
                         onClick={() => {
                             props.history.push("/seebugs")
                         }}>
                         See Bugs
                     </Button>
                 </ButtonGroup>
+
+                <div className="list">
+                    <h3>Project name: {localStorage.projName}</h3>
+                    <h3>Project repository:</h3>
+                    <a href={localStorage.projRepository}>{localStorage.projRepository}</a>
+                </div>
 
                 <div id="option">
                     <label>Choose an option:</label>
@@ -80,7 +86,7 @@ class SeeProject extends Component {
                     <label for="tst">TST</label> 
                     <br></br>
                 <Button
-                    id="bb"
+                    id="log"
                     variant="contained"
                     size="small"
                     onClick={() => {
@@ -89,16 +95,7 @@ class SeeProject extends Component {
                     Submit
                 </Button>
                 </div>
-
-            
-                <br></br>
-                <br></br>
-                <div>
-                    <h3>Project name: {localStorage.projName}</h3>
-                    <h3>Project repository:</h3>
-                    <a href={localStorage.projRepository}>{localStorage.projRepository}</a>
-                </div>
-
+                <div className="gol"></div>
             </div>
 
         )

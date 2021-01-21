@@ -31,11 +31,12 @@ class AddProject extends Component {
         return (
             <div>
                 <br></br>
-                <Typography variant="h6">Add Project</Typography>
+                <Typography variant="h4">Add Project</Typography>
                 <br></br>
-                <form onSubmit={this.handleSubmit}>
+                <form className="login" onSubmit={this.handleSubmit}>
                     <label>Name: <br />
                         <input
+                           className="input"
                             type="text"
                             name="name"
                             required
@@ -45,6 +46,7 @@ class AddProject extends Component {
                     </label><br />
                     <label>Repository: <br />
                         <input
+                           className="input"
                             type="text"
                             name="repository"
                             required
@@ -54,6 +56,7 @@ class AddProject extends Component {
                     </label><br />
                     <br></br>
                     <input
+                        id="log"
                         type="submit"
                         value="Add"
                         onClick={() => {

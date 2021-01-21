@@ -9,10 +9,12 @@ class SeeBugs extends Component {
         return (
             <div>
                 <br></br>
-                <Typography variant="h6">See Bugs</Typography>
+                <Typography variant="h4">See Bugs</Typography>
                 <br></br>
                 <div ><BugList /></div>
-            </div>  
+                
+                <div className="gol"></div>
+            </div> 
         )
     }
 }

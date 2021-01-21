@@ -34,11 +34,12 @@ class AddBug extends Component {
         return (
             <div>
                 <br></br>
-                <Typography variant="h6">Add Bug</Typography>
+                <Typography variant="h4">Add Bug</Typography>
                 <br></br>
-                    <form onSubmit={this.handleSubmit}>
+                    <form className="login" id="bugy" onSubmit={this.handleSubmit}>
                         <label>Severity: <br/>
                             <input 
+                                className="input"
                                 type="number" 
                                 name="severity" 
                                 required 
@@ -47,6 +48,7 @@ class AddBug extends Component {
                             /></label><br/>
                         <label>Priority: <br/>
                             <input 
+                                className="input"
                                 type="number" 
                                 name="priority" 
                                 required 
@@ -54,7 +56,8 @@ class AddBug extends Component {
                                 onChange={this.handleChange}
                             /></label><br/>
                         <label>Description: <br/>
-                            <input 
+                            <input
+                                className="input" 
                                 type="text" 
                                 name="description" 
                                 required 
@@ -63,6 +66,7 @@ class AddBug extends Component {
                             /></label><br/>
                         <label>Link Commit: <br/>
                             <input 
+                                className="input"
                                 type="url" 
                                 name="linkCommit"
                                 required 
@@ -71,6 +75,7 @@ class AddBug extends Component {
                             /></label><br/>
                         <br></br>
                         <input 
+                            id="log"
                             type="submit" 
                             value="Add" 
                             onClick={() => {

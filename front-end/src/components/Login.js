@@ -39,13 +39,15 @@ class Login extends Component {
         const props = this.props;
         const {email, password} = this.state;
         return (
-            <div>
+            <div id="login">
                 <br></br>
-                <Typography variant="h6">Login</Typography>
+                <Typography variant="h4">Login</Typography>
                 <br></br>
-                    <form onSubmit={this.handleSubmit}>
+                    <form className="login" onSubmit={this.handleSubmit}>
+                    
                         <label>Email: <br/>
                             <input 
+                                className="input"
                                 type="text" 
                                 name="email" 
                                 required 
@@ -54,6 +56,7 @@ class Login extends Component {
                         </label><br/>
                         <label>Password: <br/>
                             <input 
+                                className="input"
                                 type="password" 
                                 name="password" 
                                 required 
@@ -62,6 +65,7 @@ class Login extends Component {
                         </label><br/>
                         <br></br>
                         <input 
+                        id="log"
                             type="submit" 
                             value="Submit" 
                             onClick={() => {
@@ -69,9 +73,9 @@ class Login extends Component {
                         } />
                         <br></br>
                         <input 
-                            id="bb"
+                            id="log"
                             type="submit" 
-                            value="Register" 
+                            value="Create new account" 
                             onClick={() => {
                                 props.history.push("/register")
                             }
