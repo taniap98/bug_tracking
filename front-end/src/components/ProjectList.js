@@ -35,9 +35,10 @@ const Project = ({ project }) => {
       
       axios.get(`http://localhost:8080/api/project`,  {headers: {'Authentication': localStorage.userId}})
         .then(res => {
-          console.log(res.data);
+         
           const projects = res.data;
           this.setState({projects})
+
         })
         .catch(err => console.log(err))
     }
