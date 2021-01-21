@@ -15,12 +15,39 @@ const controller = {
         }
         return next();
     },
+
+    loginCheck: async(req, res, next) =>{
+        const {email, password} = req.body;
+        try{
+            const findUser = await userDB.findOne({
+                where: {
+                    email: email
+                }
+            })
+            try {
+               
+                const isOk = await bcrypt.compare(password, findUser.password);
+                if(isOk){
+                    res.status(200).send({logedInUser: findUser.id, ok: true});
+                } else {
+                    res.send({message: "Password incorrect", ok: false});
+                }
+              } catch (err) {
+                    res.send({message: "Password irimail invalid", ok: false});
+            }
+        
+        }
+        catch(err){
+            res.send({message: "Email invalid", ok: false});
+        }
+    },
     
     checkNotAuth: async(req, res, next) =>{
         if (req.headers.authorization) {
-          return next();
+            res.send({ok: true})
         }
-        res.redirect("/api/notAuth");
+        res.send({ok: false})
+
     },
 
     checkIfMPOnThisProject: async(req, res, next) => {
@@ -129,32 +156,7 @@ router.get("/alreadyAuth", async (req, res) => {
 // );
 
 router.post(
-    "/login", async (req, res) => {
-        console.log(req.body);
-        const {email, password} = req.body;
-        try{
-            const findUser = await userDB.findOne({
-                where: {
-                    email: email
-                }
-            })
-            try {
-               
-                const isOk = await bcrypt.compare(password, findUser.password);
-                if(isOk){
-                    res.status(200).send({logedInUser: findUser.id, ok: true});
-                } else {
-                    res.send({message: "Password incorrect", ok: false});
-                }
-              } catch (err) {
-                    res.send({message: "Password irimail invalid", ok: false});
-            }
-        
-        }
-        catch(err){
-            res.send({message: "Email invalid", ok: false});
-        }
-    }
+    "/login", controller.loginCheck
 )
 
 router.delete("/logout", async (req, res) => {

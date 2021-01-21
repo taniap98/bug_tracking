@@ -4,7 +4,7 @@ import {Button, Typography, ButtonGroup} from '@material-ui/core';
 import axios from 'axios';
 //import User from "../controller/user";
 
-class Home extends Component {
+class Login extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -82,4 +82,4 @@ class Home extends Component {
     }
 }
 
-export default withRouter(Home);
+export default withRouter(Login);

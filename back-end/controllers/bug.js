@@ -141,7 +141,7 @@ const controller = {
         try{
             const link = req.body.linkResolve;
             if(!link || !link.includes("https://")){
-                res.status(400).send("It requiers a link");
+                res.send({message:"It requiers a link", ok:false});
                 
             } else {
                 let bugId = req.path.split('/')[3];
@@ -156,7 +156,8 @@ const controller = {
                     {where: { id: bugId } }
                     );
                 res.status(200).send({
-                    message: "Status for bug " + bugId + " updated."
+                    message: "Status for bug " + bugId + " updated.",
+                    ok:true
                 });
             }
         } catch(error){

@@ -1,7 +1,7 @@
 import './App.css';
 import React, {Component} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import Home from './components/Home';
+import Login from './components/Login';
 import About from './components/About';
 import Nav from './components/Nav';
 import AddProject from './components/AddProject';
@@ -22,7 +22,7 @@ class App extends Component{
       <Switch>
       <Route path="/" exact strict component={() => {
           return (
-            <div className="App"><Home/></div>
+            <div className="App"><Login/></div>
           )
         }} />  
 

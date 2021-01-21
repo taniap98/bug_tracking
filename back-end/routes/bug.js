@@ -10,6 +10,6 @@ router.get("/bug", bugController.getBug);
 /**/router.post("/bug/onlyMP", loginRouter.checkIfMP, bugController.seeMyBugs);
 router.delete("/bug/delete/:id", bugController.deleteOneBug);
 router.get("/bug/:id", bugController.getOneBug);
-/**/router.put("/bug/changeStatus/:id", loginRouter.checkIfMPOnThisProject, bugController.updateStatus);
+/**/router.put("/bug/changeStatus/:id", bugController.updateStatus);
 
 module.exports = router;

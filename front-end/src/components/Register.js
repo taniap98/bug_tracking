@@ -16,6 +16,35 @@ class Register extends Component {
         };
         this.user = '';
     }
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(this.state);
+        axios.post("http://localhost:8080/api/user/register", this.state)
+        .then(res => {
+            axios.post("http://localhost:8080/api/login", this.state,  { withCredentials: true }, {headers: {"Authorization": true}})
+            .then(res => {
+    
+                if(res.data["ok"]){
+                    localStorage.setItem('userId', res.data["logedInUser"]);      
+                    this.props.history.push("/about")
+                } else {
+                    alert(res.data["message"]);
+                }
+                
+            })
+            .catch(e =>{
+                
+            })
+        })
+        .catch(e =>{
+            alert(e);
+        })
+    }
+
+    handleChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value });
+    }
     
     render(){
         const props = this.props;
@@ -81,6 +110,7 @@ class Register extends Component {
                             type="submit" 
                             value="Register" 
                             onClick={() => {
+
                             }
                         } />
                         <br></br>
