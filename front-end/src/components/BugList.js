@@ -11,6 +11,7 @@ const Bug = ({ bug }) => {
         localStorage.setItem("bugPri", bug.priority);
         localStorage.setItem("bugDesc", bug.description);
         localStorage.setItem("bugLinkCom", bug.linkCommit);
+        localStorage.setItem("bugId", bug.id);
         history.push("/seebug")
     }}>
         <p className="subtitle">{bug.description}</p>

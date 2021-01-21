@@ -19,7 +19,7 @@ class Home extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         console.log(this.state);
-        axios.post("http://localhost:8080/api/login", this.state,  { withCredentials: true })
+        axios.post("http://localhost:8080/api/login", this.state,  { withCredentials: true }, {headers: {"Authorization": true}})
         .then(res => {
 
             if(res.data["ok"]){

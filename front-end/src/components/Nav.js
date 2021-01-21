@@ -1,8 +1,23 @@
 import React, {Component} from 'react';
 import {AppBar, Toolbar, Typography, Button} from '@material-ui/core';
 import {withRouter} from 'react-router-dom';
+import axios from 'axios';
 
 class Nav extends Component {
+
+    logOut = (e) => {
+        e.preventDefault();
+        
+        axios.delete("http://localhost:8080/api/logout")
+        .then(res => {
+            localStorage.clear();
+            this.props.history.push("/");
+            
+        })
+        .catch(e =>{
+            
+        })
+    }
     render(){
         const props = this.props;
         return (
@@ -19,10 +34,7 @@ class Nav extends Component {
                             </Button>
                             <Button 
                             style={{color: "white"}}
-                            onClick={() => {
-                                localStorage.clear();
-                                props.history.push("/")
-                            }}>
+                            onClick={this.logOut}>
                                 Log out
                             </Button>
                             
