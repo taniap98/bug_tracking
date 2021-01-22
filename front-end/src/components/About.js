@@ -25,7 +25,7 @@ class About extends Component {
 
                 <div ><ProjectList /></div>
 
-                <div className="gol"></div>
+                {/* <div className="gol"></div> */}
 
             </div>
         )

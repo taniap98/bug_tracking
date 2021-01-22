@@ -13,7 +13,7 @@ class SeeBugs extends Component {
                 <br></br>
                 <div ><BugList /></div>
                 
-                <div className="gol"></div>
+                {/* <div className="gol"></div> */}
             </div> 
         )
     }

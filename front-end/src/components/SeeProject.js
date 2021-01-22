@@ -95,7 +95,7 @@ class SeeProject extends Component {
                     Submit
                 </Button>
                 </div>
-                <div className="gol"></div>
+                {/* <div className="gol"></div> */}
             </div>
 
         )
